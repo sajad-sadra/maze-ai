@@ -1,6 +1,6 @@
-const MAX_ID = (20 - 1) * 20 + (20 - 1);
-
 module.exports = {
+
+    maximum_id: 399, // (20 - 1) * 20 + (20 - 1)
 
     get_adjs: function (x, y) {
         let adjs = Array();

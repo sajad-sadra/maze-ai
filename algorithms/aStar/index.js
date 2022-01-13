@@ -54,7 +54,7 @@ function algorithm(arr) {
         extend_flag = false;
         for (let i = 0; i < adjs_cells.length; i++) {
             xy = tools.get_xy(adjs_cells[i]);
-            if (!visited.has(adjs_cells[i]) && arr[xy[0]][xy[1]] !== home.type.wall && arr[xy[0]][xy[1]] !== home.type.hole) {
+            if (!visited.has(adjs_cells[i]) && arr[xy[0]][xy[1]] != home.type.wall && arr[xy[0]][xy[1]] != home.type.hole) {
                 extend_flag = true;
                 new_path = cur_path.slice();
                 new_path.push(adjs_cells[i]);

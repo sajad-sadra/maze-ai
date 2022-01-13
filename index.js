@@ -5,11 +5,17 @@ const inital = require("./config/initial"),
 let main_table = inital.make_primary_table();
 
 let result = algorithm[process.env.ALGO](main_table, 0, 0, 4, 7);
-result = algorithm[process.env.ALGO](result.table, 4, 7, 16, 16);
+if (!result.success)
+    print_result(result.success, result.table);
+else {
+    result = algorithm[process.env.ALGO](result.table, 4, 7, 16, 16);
+    print_result(result.success, result.table);
+}
 
 
 
 
-// Print Result
-console.table(inital.reset_start_and_fruit(result.table));
-console.log(result);
+function print_result(success, table) {
+    console.log(success ? "😊SUCCEED😊" : "😞FAILED😞");
+    console.table(inital.reset_start_and_fruit(table));
+}
