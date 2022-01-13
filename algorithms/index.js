@@ -1,6 +1,6 @@
 module.exports = {
-    1: require("./depthFirst"),
-    2: require("./uniformCost"),
-    3: require("./iterativeDeepening"),
-    4: require("./aStar")
+    "Depth First Search": require("./depthFirst"),
+    "Uniform Cost Search": require("./uniformCost"),
+    "Iterative Deepening Search": require("./iterativeDeepening"),
+    "A*": require("./aStar")
 }

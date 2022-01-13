@@ -1,14 +1,14 @@
 const inital = require("./config/initial"),
-    algorithm = require("./algorithms");
+    algorithms = require("./algorithms");
 
 
-let main_table = inital.make_primary_table();
+let main_table = inital();
 
-let result = algorithm[process.env.ALGO](main_table, 0, 0, 4, 7);
-result = algorithm[process.env.ALGO](result.table, 4, 7, 16, 16);
+console.table(main_table);
 
-
-
-// Print Result
-console.log(result.success ? "😊SUCCEED😊" : "😞FAILED😞");
-console.table(inital.reset_start_and_fruit(result.table));
+for (const name in algorithms){
+    console.log("\n", name, ":");
+    let result = algorithms[name](main_table, 0, 0, 4, 7);
+    result = algorithms[name](result, 4, 7, 16, 16);
+    console.table(result);
+}

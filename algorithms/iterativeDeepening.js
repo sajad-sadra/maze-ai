@@ -4,30 +4,26 @@ const tools = require("./tools"),
 let START_X, START_Y, END_X, END_Y;
 
 
-module.exports = (array, sx, sy, ex, ey) => {
+module.exports = (table, sx, sy, ex, ey) => {
     START_X = sx;
     START_Y = sy;
     END_X = ex;
     END_Y = ey;
     TARGET_ID = END_X * 20 + END_Y;
-    extend_count = 0;
-    search_cost = 0;
 
-    let result = algorithm(array);
-    let path = result.path;
+    let path = algorithm(table).path;
     path.forEach((node_id) => {
         let xy = tools.get_xy(node_id);
-        array[xy[0]][xy[1]] = home.type.tracked;
-    });
-    result.table = array;
-    return result;
+        table[xy[0]][xy[1]] = home.type.tracked;
+    }); 
+    return table;
 }
 
-function algorithm(arr) {
+function algorithm(table) {
     let depth = 0;
     let res;
     while (true) {
-        res = DLS_algo(arr, depth);
+        res = DLS_algo(table, depth);
         if (res.cutoff === false) {
             return res;
         }
@@ -35,7 +31,7 @@ function algorithm(arr) {
     }
 }
 
-function DLS_algo(arr, depth_limit) {
+function DLS_algo(table, depth_limit) {
     let visited = new Array(tools.maximum_id + 1);
     visited.fill(999999);
     let path = [];
@@ -58,9 +54,6 @@ function DLS_algo(arr, depth_limit) {
         if (cur_id == TARGET_ID) {
             return {
                 path: path,
-                node_number: extend_count,
-                search_cost: search_cost,
-                success: true,
                 cutoff: false,
             };
         }
@@ -70,30 +63,25 @@ function DLS_algo(arr, depth_limit) {
             continue;
         }
         xy = tools.get_xy(cur_id);
-        adj_cell = get_one_unvisited_adj(xy, cur_depth, visited, arr);
+        adj_cell = get_one_unvisited_adj(xy, cur_depth, visited, table);
         if (adj_cell == -1) {
             path.pop();
-            extend_count++;
             continue;
         }
         path.push(adj_cell);
-        search_cost++;
     }
-    return {
+    return [{
         path: [],
-        node_number: extend_count,
-        search_cost: search_cost,
-        success: false,
         cutoff: cutoff_flag,
-    };
+    }];
 }
 
-function get_one_unvisited_adj(cur_xy, cur_depth, visited, arr) {
+function get_one_unvisited_adj(cur_xy, cur_depth, visited, table) {
     let adjs = tools.get_adjs(cur_xy[0], cur_xy[1]);
     let child_id = -1;
     adjs.some((adj) => {
         let xy = tools.get_xy(adj);
-        if (arr[xy[0]][xy[1]] != home.type.wall && arr[xy[0]][xy[1]] != home.type.hole && cur_depth + 1 < visited[adj]) {
+        if (table[xy[0]][xy[1]] != home.type.wall && table[xy[0]][xy[1]] != home.type.hole && cur_depth + 1 < visited[adj]) {
             child_id = adj;
             return true;
         }

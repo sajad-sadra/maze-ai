@@ -34,15 +34,10 @@ function set_obstacle(count, character, array){
     return array;
 }
 
-function make_primary_table (){
+module.exports = () => {
     let table = empty_table();
     table = set_start_and_fruit(table);
     table = set_obstacle(60, home.type.wall, table);
     table = set_obstacle(20, home.type.hole, table);
     return table;
-}
-
-module.exports = {
-    reset_start_and_fruit: set_start_and_fruit,
-    make_primary_table
 }

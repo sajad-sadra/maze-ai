@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dfs": "ALGO=1 node index.js",
-    "ucs": "ALGO=2 node index.js",
-    "ids": "ALGO=3 node index.js",
-    "ast": "ALGO=4 node index.js"
+    "start": "node index.js",
   },
   "keywords": [],
   "author": "",
