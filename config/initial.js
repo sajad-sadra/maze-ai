@@ -15,14 +15,15 @@ function empty_table(){
         }
     }
 
-    // Set value for start and fruit homes
-    arr[0][0] = home.type.start; 
-    arr[4][7] = home.type.fruit;
-    arr[16][16] = home.type.fruit;
-
     return arr;
 }
 
+function set_start_and_fruit(arr){
+    arr[0][0] = home.type.start; 
+    arr[4][7] = home.type.fruit;
+    arr[16][16] = home.type.fruit;
+    return arr;
+}
 
 function set_obstacle(count, character, array){
     for (let i = 0; i < count; i++){
@@ -33,9 +34,15 @@ function set_obstacle(count, character, array){
     return array;
 }
 
-module.exports = () => {
+function make_primary_table (){
     let table = empty_table();
+    table = set_start_and_fruit(table);
     table = set_obstacle(60, home.type.wall, table);
     table = set_obstacle(20, home.type.hole, table);
     return table;
-};
+}
+
+module.exports = {
+    reset_start_and_fruit: set_start_and_fruit,
+    make_primary_table
+}

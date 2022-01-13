@@ -1,21 +1,21 @@
 const MAX_ID = (20 - 1) * 20 + (20 - 1);
 
-module.export = {
+module.exports = {
 
     get_adjs: function (x, y) {
         let adjs = Array();
         let adj_id;
 
-        adj_id = get_id(x, y + 1);
+        adj_id = this.get_id(x, y + 1);
         if (adj_id != -1) adjs.push(adj_id);
 
-        adj_id = get_id(x, y - 1);
+        adj_id = this.get_id(x, y - 1);
         if (adj_id != -1) adjs.push(adj_id);
 
-        adj_id = get_id(x + 1, y);
+        adj_id = this.get_id(x + 1, y);
         if (adj_id != -1) adjs.push(adj_id);
 
-        adj_id = get_id(x - 1, y);
+        adj_id = this.get_id(x - 1, y);
         if (adj_id != -1) adjs.push(adj_id);
 
         return adjs;

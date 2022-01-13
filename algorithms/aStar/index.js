@@ -1,8 +1,10 @@
-const tools = require("./tools");
+const priority_queue = require("./priorityQueue"),
+ tools = require("../tools"),
+ home = require("../../config/home");
 
 let START_X, START_Y, END_X, END_Y;
 
-module.export = (array, sx, sy, ex, ey) => {
+module.exports = (array, sx, sy, ex, ey) => {
     START_X = sx;
     START_Y = sy;
     END_X = ex;
@@ -13,14 +15,14 @@ module.export = (array, sx, sy, ex, ey) => {
     let path = result.path;
     path.forEach((node_id) => {
         let xy = tools.get_xy(node_id);
-        array[xy[0]][xy[1]] = "*";
+        array[xy[0]][xy[1]] = home.type.tracked;
     });
-    result.array = array;
+    result.table = array;
     return result;
 }
 
 function algorithm(arr) {
-    let frontier = new PriorityQueue((a, b) => a[1] < b[1]);
+    let frontier = new priority_queue((a, b) => a[1] < b[1]);
     let visited = new Set();
     let cur_path = [];
     let cur_id;
@@ -52,7 +54,7 @@ function algorithm(arr) {
         extend_flag = false;
         for (let i = 0; i < adjs_cells.length; i++) {
             xy = tools.get_xy(adjs_cells[i]);
-            if (!visited.has(adjs_cells[i]) && arr[xy[0]][xy[1]] !== 1) {
+            if (!visited.has(adjs_cells[i]) && arr[xy[0]][xy[1]] !== home.type.wall && arr[xy[0]][xy[1]] !== home.type.hole) {
                 extend_flag = true;
                 new_path = cur_path.slice();
                 new_path.push(adjs_cells[i]);
