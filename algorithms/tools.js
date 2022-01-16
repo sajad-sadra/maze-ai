@@ -2,23 +2,23 @@ module.exports = {
 
     maximum_id: 399, // (20 - 1) * 20 + (20 - 1)
 
-    get_adjs: function (x, y) {
-        let adjs = Array();
-        let adj_id;
+    get_neighbours: function (x, y) {
+        let neighbours = Array();
+        let neighbour_id;
 
-        adj_id = this.get_id(x, y + 1);
-        if (adj_id != -1) adjs.push(adj_id);
+        neighbour_id = this.get_id(x, y + 1);
+        if (neighbour_id != -1) neighbours.push(neighbour_id);
 
-        adj_id = this.get_id(x, y - 1);
-        if (adj_id != -1) adjs.push(adj_id);
+        neighbour_id = this.get_id(x, y - 1);
+        if (neighbour_id != -1) neighbours.push(neighbour_id);
 
-        adj_id = this.get_id(x + 1, y);
-        if (adj_id != -1) adjs.push(adj_id);
+        neighbour_id = this.get_id(x + 1, y);
+        if (neighbour_id != -1) neighbours.push(neighbour_id);
 
-        adj_id = this.get_id(x - 1, y);
-        if (adj_id != -1) adjs.push(adj_id);
+        neighbour_id = this.get_id(x - 1, y);
+        if (neighbour_id != -1) neighbours.push(neighbour_id);
 
-        return adjs;
+        return neighbours;
     },
 
     get_id: function (x, y) {
@@ -40,6 +40,23 @@ module.exports = {
             res_xy.push(get_xy(element));
         });
         return res_xy;
-    }
+    },
 
+    clone_2d_array: function (array) {
+        let result = [];
+        array.forEach(element => {
+            let temp = [];
+            element.forEach(home => {
+                temp.push(home);
+            })
+            result.push(temp);
+        });
+        return result;
+    },
+
+    clone_array: function (array) {
+        let temp = [];
+        array.forEach(e => temp.push(e));
+        return temp;
+    }
 }

@@ -39,10 +39,10 @@ function algorithm(table) {
             return path;
         }
         xy = tools.get_xy(cur_id);
-        adjs_cells = tools.get_adjs(xy[0], xy[1]);
+        adjs_cells = tools.get_neighbours(xy[0], xy[1]);
         for (let i = 0; i < adjs_cells.length; i++) {
             xy = tools.get_xy(adjs_cells[i]);
-            if (!visited.has(adjs_cells[i]) && table[xy[0]][xy[1]] != home.type.wall && table[xy[0]][xy[1]] != home.type.hole) {
+            if (!visited.has(adjs_cells[i]) && table[xy[0]][xy[1]] != home.type.wall) {
                 extend_flag = true;
                 new_path = path.slice();
                 new_path.push(adjs_cells[i]);

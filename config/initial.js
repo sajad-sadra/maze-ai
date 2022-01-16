@@ -38,6 +38,5 @@ module.exports = () => {
     let table = empty_table();
     table = set_start_and_fruit(table);
     table = set_obstacle(60, home.type.wall, table);
-    table = set_obstacle(20, home.type.hole, table);
     return table;
 }

@@ -1,14 +1,16 @@
 const inital = require("./config/initial"),
-    algorithms = require("./algorithms");
+    algorithms = require("./algorithms"),
+    tools = require("./algorithms/tools");
 
 
 let main_table = inital();
 
 console.table(main_table);
 
-for (const name in algorithms){
+for (const name in algorithms) {
+    let result = algorithms[name](tools.clone_2d_array(main_table), 0, 0, 4, 7);
+    result = algorithms[name](tools.clone_2d_array(result), 4, 7, 16, 16);
+
     console.log("\n", name, ":");
-    let result = algorithms[name](main_table, 0, 0, 4, 7);
-    result = algorithms[name](result, 4, 7, 16, 16);
     console.table(result);
 }

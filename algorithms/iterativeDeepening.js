@@ -77,11 +77,11 @@ function DLS_algo(table, depth_limit) {
 }
 
 function get_one_unvisited_adj(cur_xy, cur_depth, visited, table) {
-    let adjs = tools.get_adjs(cur_xy[0], cur_xy[1]);
+    let adjs = tools.get_neighbours(cur_xy[0], cur_xy[1]);
     let child_id = -1;
     adjs.some((adj) => {
         let xy = tools.get_xy(adj);
-        if (table[xy[0]][xy[1]] != home.type.wall && table[xy[0]][xy[1]] != home.type.hole && cur_depth + 1 < visited[adj]) {
+        if (table[xy[0]][xy[1]] != home.type.wall && cur_depth + 1 < visited[adj]) {
             child_id = adj;
             return true;
         }
