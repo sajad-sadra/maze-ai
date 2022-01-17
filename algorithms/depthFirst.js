@@ -17,9 +17,10 @@ module.exports = (table, sx, sy, ex, ey) => {
 
     algorithm(table, sx, sy, ex, ey, visited, []);
 
+    console.log(optimalPath);
+
     optimalPath.forEach((node_id) => {
         let xy = tools.get_xy(node_id);
-        //console.log(xy);
         table[xy[0]][xy[1]] = home.type.tracked;
     });
     return table;
@@ -37,6 +38,7 @@ function algorithm(table, sx, sy, ex, ey, visited, path) {
         if (path.length <= MIN) {
             MIN = path.length;
             optimalPath = tools.clone_array(path);
+            return;
         }
     }
 

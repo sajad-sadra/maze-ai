@@ -1,7 +1,5 @@
 module.exports = {
 
-    maximum_id: 399, // (20 - 1) * 20 + (20 - 1)
-
     get_neighbours: function (x, y) {
         let neighbours = Array();
         let neighbour_id;

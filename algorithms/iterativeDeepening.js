@@ -32,7 +32,7 @@ function algorithm(table) {
 }
 
 function DLS_algo(table, depth_limit) {
-    let visited = new Array(tools.maximum_id + 1);
+    let visited = new Array(399 + 1);
     visited.fill(999999);
     let path = [];
 
