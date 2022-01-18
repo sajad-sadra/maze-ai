@@ -1,14 +1,8 @@
 const tools = require("./tools"),
     home = require("../config/home");
 
-module.exports = (table, sx, sy, ex, ey) => {
-    let path = algorithm(tools.clone_2d_array(table), sx, sy, ex, ey);
-    path.forEach((node_id) => {
-        let xy = tools.get_xy(node_id);
-        table[xy[0]][xy[1]] = home.type.tracked;
-    });
-    return table;
-}
+module.exports = (table, sx, sy, ex, ey) => tools.set_path_to_table(table, algorithm(tools.clone_2d_array(table), sx, sy, ex, ey));
+
 
 
 function algorithm(table, sx, sy, ex, ey) {

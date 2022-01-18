@@ -11,12 +11,7 @@ module.exports = (table, sx, sy, ex, ey) => {
     END_Y = ey;
     TARGET_ID = END_X * 20 + END_Y;
 
-    let path = algorithm(table);
-    path.forEach((node_id) => {
-        let xy = tools.get_xy(node_id);
-        table[xy[0]][xy[1]] = home.type.tracked;
-    });
-    return table;
+    return tools.set_path_to_table(table, algorithm(table));
 }
 
 function algorithm(table) {

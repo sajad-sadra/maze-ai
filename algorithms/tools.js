@@ -1,3 +1,5 @@
+const home = require("../config/home");
+
 module.exports = {
 
     get_neighbours: function (x, y) {
@@ -56,5 +58,13 @@ module.exports = {
         let temp = [];
         array.forEach(e => temp.push(e));
         return temp;
+    },
+
+    set_path_to_table: function(table, path){
+        path.forEach((node_id) => {
+            let xy = this.get_xy(node_id);
+            table[xy[0]][xy[1]] = home.type.tracked;
+        }); 
+        return table;
     }
 }
