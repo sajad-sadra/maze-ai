@@ -14,7 +14,7 @@ for (const name in algorithms) {
     let total_extend_count = result.extend_count;
 
 
-    //result = algorithms[name](tools.clone_2d_array(result.result_table), 4, 7, 16, 16);
+    result = algorithms[name](tools.clone_2d_array(result.result_table), 4, 7, 16, 16);
 
     total_search_cost += result.search_cost;
     total_extend_count += result.extend_count;
