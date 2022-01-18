@@ -1,8 +1,15 @@
 const tools = require("./tools"),
     home = require("../config/home");
+let EXTEND_COUNT = 0;
 
-module.exports = (table, sx, sy, ex, ey) => tools.set_path_to_table(table, algorithm(tools.clone_2d_array(table), sx, sy, ex, ey));
-
+module.exports = (table, sx, sy, ex, ey) => {
+    let result = algorithm(tools.clone_2d_array(table), sx, sy, ex, ey);
+    return {
+        result_table: tools.set_path_to_table(table, result.path),
+        search_cost: result.cost,
+        extend_count: EXTEND_COUNT
+    }
+}
 
 
 function algorithm(table, sx, sy, ex, ey) {
@@ -28,7 +35,10 @@ function algorithm(table, sx, sy, ex, ey) {
             final_path = r.path;
         }
     })
-    return final_path;
+    return {
+        path: final_path,
+        cost: min
+    };
 }
 
 
@@ -53,6 +63,7 @@ function adjacent(table, frontier) {
             let neighbour = dirs[d](...element);
             if (valid(table, neighbour[0], neighbour[1])) {
                 adjs.push([...neighbour]);
+                EXTEND_COUNT++;
             }
         }
     }

@@ -7,7 +7,8 @@ let MIN = 999999,
 
 module.exports = (table, sx, sy, ex, ey) => {
     TABLE = tools.clone_2d_array(table);
-    return => tools.set_path_to_table(table, algorithm(TABLE, sx, sy, ex, ey));
+
+    return tools.set_path_to_table(table, algorithm(TABLE, sx, sy, ex, ey));
 }
 
 function algorithm(sx, sy, ex, ey, path) {

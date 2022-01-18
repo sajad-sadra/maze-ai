@@ -1,7 +1,7 @@
 const tools = require("./tools"),
     home = require("../config/home");
 
-let START_X, START_Y, END_X, END_Y;
+let START_X, START_Y, END_X, END_Y, SEARCH_COST = 0, EXTEND_COUNT = 0;
 
 
 module.exports = (table, sx, sy, ex, ey) => {
@@ -10,8 +10,11 @@ module.exports = (table, sx, sy, ex, ey) => {
     END_X = ex;
     END_Y = ey;
     TARGET_ID = END_X * 20 + END_Y;
-
-    return tools.set_path_to_table(table, algorithm(table).path);
+    return {
+        result_table: tools.set_path_to_table(table, algorithm(table).path),
+        search_cost: SEARCH_COST,
+        extend_count: EXTEND_COUNT
+    }
 }
 
 function algorithm(table) {
@@ -61,9 +64,11 @@ function DLS_algo(table, depth_limit) {
         adj_cell = get_one_unvisited_adj(xy, cur_depth, visited, table);
         if (adj_cell == -1) {
             path.pop();
+            EXTEND_COUNT++;
             continue;
         }
         path.push(adj_cell);
+        SEARCH_COST++;
     }
     return [{
         path: [],
