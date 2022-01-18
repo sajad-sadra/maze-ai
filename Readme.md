@@ -8,3 +8,6 @@ For more information read [this document](http://lms.ui.ac.ir/public/group/68/9a
 - Clone this repo
 - Go to project dir
 - Run with `node index.js` or `npm start` command
+
+
+See the demo pictures [HERE](https://github.com/sajad-sadra/maze-ai/tree/main/demo).
